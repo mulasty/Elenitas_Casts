@@ -1,0 +1,126 @@
+{
+  "meta": {
+    "title": "Elenita's Cats — Cats, Roblox & K-Pop in Manga Style",
+    "description": "Official Elenita's Cats website. Short cat videos, Roblox, funny animals and K-pop in an interactive webtoon style!"
+  },
+  "nav": {
+    "home": "Home",
+    "cats": "Cats",
+    "roblox": "Roblox",
+    "kpop": "K-Pop",
+    "funny": "Funny",
+    "subscribe": "Subscribe"
+  },
+  "loading": {
+    "text": "Loading page 1...",
+    "sub": "Elenita's Cats"
+  },
+  "hero": {
+    "chapter": "VOL 1",
+    "title": "Elenita's Cats",
+    "subtitle": "Cats, Roblox & K-Pop",
+    "cta": "Start the adventure!",
+    "scroll": "Scroll down",
+    "deco": {
+      "nyan": "NYAN!",
+      "boom": "BOOM!",
+      "cute": "CUTE!"
+    }
+  },
+  "chapter1": {
+    "label": "CHAPTER 1",
+    "title": "Meet Elenita",
+    "stats": {
+      "cats": "Cats",
+      "roblox": "Roblox",
+      "kpop": "K-Pop",
+      "illit": "ILLIT",
+      "bp": "BLACKPINK"
+    },
+    "bio": "Hey! I'm Elenita! I love cats, play Roblox, and adore K-pop — especially ILLIT and BLACKPINK. On my channel you'll find short, funny videos with my furry friends, Roblox adventures, and reactions to Korean music!",
+    "speech": {
+      "greeting": "Hi!",
+      "excited": "I love cats!",
+      "roblox": "Let's play Roblox!",
+      "kpop": "ILLIT & BLACKPINK!"
+    }
+  },
+  "chapter2": {
+    "label": "CHAPTER 2",
+    "title": "The Cat Chronicles",
+    "description": "The cutest and funniest moments with my furry friends!",
+    "watch": "Watch on YouTube"
+  },
+  "chapter3": {
+    "label": "CHAPTER 3",
+    "title": "Roblox Adventures",
+    "description": "My adventures in the world of Roblox — challenges, builds and funny moments!",
+    "cta": "Join the game!",
+    "tabs": {
+      "games": "Games",
+      "badges": "Badges",
+      "friends": "Friends",
+      "inventory": "Inventory"
+    },
+    "chatTitle": "In-Game Chat",
+    "chat1": "Hey! Who wants to play Adopt Me? 🐱",
+    "chat2": "Me! I got a new legendary cat! ✨",
+    "chat3": "Awesome! Join my server! 🎮"
+  },
+  "chapter4": {
+    "label": "CHAPTER 4",
+    "title": "K-Pop Corner",
+    "description": "My little K-pop world — lightsticks, favorite groups and music videos!",
+    "bias": "Bias List",
+    "favSong": "Favorite song",
+    "illit": "ILLIT",
+    "blackpink": "BLACKPINK"
+  },
+  "chapter5": {
+    "label": "CHAPTER 5",
+    "title": "Funny Animalz",
+    "description": "Funny animals, memes and moments that will make you laugh!",
+    "panel1": "Wait... what?!",
+    "panel2": "That's not how it's supposed to look!",
+    "panel3": "Hahaha!",
+    "panel4": "So cute!"
+  },
+  "chapter6": {
+    "label": "CHAPTER 6",
+    "title": "To be continued...",
+    "subtitle": "Will Elenita reach 1 million subs?!",
+    "description": "Subscribe to my channel to stay up to date with new episodes!",
+    "cta": "Subscribe on YouTube",
+    "followers": "Subscribers",
+    "thanks": "Thank you for your support!"
+  },
+  "chapter7": {
+    "label": "CHAPTER 7",
+    "title": "Blog",
+    "comingSoon": "Coming Soon!",
+    "description": "Blog posts about cats, Roblox, K-pop and more will appear here!",
+    "preview1": "My Top 5 Favorite Roblox Games",
+    "preview2": "How to Make a DIY ILLIT Lightstick",
+    "preview3": "Top 10 Funniest Cat Moments"
+  },
+  "chapter8": {
+    "label": "CHAPTER 8",
+    "title": "Merch",
+    "comingSoon": "Official merch coming soon!",
+    "items": {
+      "stickers": "Cat Stickers",
+      "keychain": "Lightstick Keychain",
+      "tote": "Pastel Tote Bag"
+    }
+  },
+  "footer": {
+    "credits": "Created by Elenita",
+    "copyright": "© 2026 Elenita's Cats. All rights reserved.",
+    "easterEgg": "🐾 You found the hidden paw!"
+  },
+  "lang": {
+    "pl": "Polski",
+    "en": "English",
+    "ko": "한국어"
+  }
+}

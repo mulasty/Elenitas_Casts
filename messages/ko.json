@@ -1,0 +1,126 @@
+{
+  "meta": {
+    "title": "Elenita's Cats — 고양이, 로블록스 & 케이팝 만화 스타일",
+    "description": "Elenita's Cats 공식 웹사이트. 고양이 영상, 로블록스, 재미있는 동물, 케이팝을 인터랙티브 웹툰 스타일로!"
+  },
+  "nav": {
+    "home": "홈",
+    "cats": "고양이",
+    "roblox": "로블록스",
+    "kpop": "케이팝",
+    "funny": "재미있는",
+    "subscribe": "구독"
+  },
+  "loading": {
+    "text": "페이지 1 로딩 중...",
+    "sub": "Elenita's Cats"
+  },
+  "hero": {
+    "chapter": "1권",
+    "title": "Elenita's Cats",
+    "subtitle": "고양이, 로블록스 & 케이팝",
+    "cta": "모험을 시작하자!",
+    "scroll": "아래로 스크롤",
+    "deco": {
+      "nyan": "냥!",
+      "boom": "펑!",
+      "cute": "귀여워!"
+    }
+  },
+  "chapter1": {
+    "label": "1장",
+    "title": "엘레니타를 만나다",
+    "stats": {
+      "cats": "고양이",
+      "roblox": "로블록스",
+      "kpop": "케이팝",
+      "illit": "ILLIT",
+      "bp": "BLACKPINK"
+    },
+    "bio": "안녕! 나는 엘레니타야! 고양이를 사랑하고, 로블록스를 하며, 케이팝 — 특히 ILLIT과 BLACKPINK를 정말 좋아해. 내 채널에서는 털복숭이 친구들과 함께한 짧고 재미있는 영상, 로블록스 모험, 한국 음악 리액션을 볼 수 있어!",
+    "speech": {
+      "greeting": "안녕!",
+      "excited": "고양이 최고!",
+      "roblox": "로블록스 하자!",
+      "kpop": "ILLIT & BLACKPINK!"
+    }
+  },
+  "chapter2": {
+    "label": "2장",
+    "title": "고양이 연대기",
+    "description": "털복숭이 친구들과 함께한 가장 귀엽고 재미있는 순간들!",
+    "watch": "유튜브에서 보기"
+  },
+  "chapter3": {
+    "label": "3장",
+    "title": "로블록스 어드벤처",
+    "description": "로블록스 세계에서의 모험 — 챌린지, 건축, 그리고 재미있는 순간들!",
+    "cta": "게임에 참여하자!",
+    "tabs": {
+      "games": "게임",
+      "badges": "배지",
+      "friends": "친구",
+      "inventory": "인벤토리"
+    },
+    "chatTitle": "게임 내 채팅",
+    "chat1": "저기! Adopt Me 할 사람? 🐱",
+    "chat2": "나! 새로운 전설 고양이 뽑았어! ✨",
+    "chat3": "대박! 내 서버로 와! 🎮"
+  },
+  "chapter4": {
+    "label": "4장",
+    "title": "케이팝 코너",
+    "description": "나의 작은 케이팝 세계 — 응원봉, 최애 그룹, 뮤직비디오!",
+    "bias": "최애 리스트",
+    "favSong": "최애곡",
+    "illit": "ILLIT",
+    "blackpink": "BLACKPINK"
+  },
+  "chapter5": {
+    "label": "5장",
+    "title": "재미있는 동물들",
+    "description": "재미있는 동물, 밈, 그리고 웃음을 터뜨리게 할 순간들!",
+    "panel1": "잠깐... 뭐야?!",
+    "panel2": "이게 아니었는데!",
+    "panel3": "하하하!",
+    "panel4": "너무 귀여워!"
+  },
+  "chapter6": {
+    "label": "6장",
+    "title": "계속됩니다...",
+    "subtitle": "엘레니타가 100만 구독자를 달성할까?!",
+    "description": "새로운 에피소드를 놓치지 않도록 채널을 구독하세요!",
+    "cta": "유튜브 구독하기",
+    "followers": "구독자",
+    "thanks": "응원해 주셔서 감사합니다!"
+  },
+  "chapter7": {
+    "label": "7장",
+    "title": "블로그",
+    "comingSoon": "곧 공개!",
+    "description": "고양이, 로블록스, 케이팝에 대한 블로그 글이 여기에 올라올 예정이에요!",
+    "preview1": "내가 가장 좋아하는 로블록스 게임 TOP 5",
+    "preview2": "DIY ILLIT 응원봉 만드는 법",
+    "preview3": "고양이와 함께한 가장 재미있는 순간 TOP 10"
+  },
+  "chapter8": {
+    "label": "8장",
+    "title": "굿즈",
+    "comingSoon": "공식 굿즈가 곧 출시됩니다!",
+    "items": {
+      "stickers": "고양이 스티커",
+      "keychain": "응원봉 키링",
+      "tote": "파스텔 토트백"
+    }
+  },
+  "footer": {
+    "credits": "엘레니타가 만듦",
+    "copyright": "© 2026 Elenita's Cats. All rights reserved.",
+    "easterEgg": "🐾 숨겨진 발을 찾았어요!"
+  },
+  "lang": {
+    "pl": "Polski",
+    "en": "English",
+    "ko": "한국어"
+  }
+}

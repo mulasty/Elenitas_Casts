@@ -1,0 +1,126 @@
+{
+  "meta": {
+    "title": "Elenita's Cats — Kotki, Roblox i K-Pop w stylu Mangi",
+    "description": "Oficjalna strona Elenita's Cats. Krótkie filmiki o kotach, Roblox, śmieszne zwierzęta i K-pop w interaktywnym stylu webtoon!"
+  },
+  "nav": {
+    "home": "Strona główna",
+    "cats": "Kotki",
+    "roblox": "Roblox",
+    "kpop": "K-Pop",
+    "funny": "Śmieszne",
+    "subscribe": "Subskrybuj"
+  },
+  "loading": {
+    "text": "Ładowanie strony 1...",
+    "sub": "Elenita's Cats"
+  },
+  "hero": {
+    "chapter": "TOM 1",
+    "title": "Elenita's Cats",
+    "subtitle": "Kotki, Roblox & K-Pop",
+    "cta": "Zacznij przygodę!",
+    "scroll": "Przewiń w dół",
+    "deco": {
+      "nyan": "NYAN!",
+      "boom": "BOOM!",
+      "cute": "SŁODKIE!"
+    }
+  },
+  "chapter1": {
+    "label": "ROZDZIAŁ 1",
+    "title": "Poznaj Elenitę",
+    "stats": {
+      "cats": "Kotki",
+      "roblox": "Roblox",
+      "kpop": "K-Pop",
+      "illit": "ILLIT",
+      "bp": "BLACKPINK"
+    },
+    "bio": "Hej! Jestem Elenita! Kocham kotki, gram w Robloxa i uwielbiam K-pop — szczególnie ILLIT i BLACKPINK. Na moim kanale znajdziesz krótkie, zabawne filmiki o moich futrzastych przyjaciołach, przygody w Robloxie i reakcje na koreańską muzykę!",
+    "speech": {
+      "greeting": "Cześć!",
+      "excited": "Uwielbiam kotki!",
+      "roblox": "Zagrajmy w Robloxa!",
+      "kpop": "ILLIT i BLACKPINK!"
+    }
+  },
+  "chapter2": {
+    "label": "ROZDZIAŁ 2",
+    "title": "Kroniki Kotów",
+    "description": "Najsłodsze i najzabawniejsze momenty z moimi futrzastymi przyjaciółmi!",
+    "watch": "Obejrzyj na YouTube"
+  },
+  "chapter3": {
+    "label": "ROZDZIAŁ 3",
+    "title": "Roblox Adventures",
+    "description": "Moje przygody w świecie Robloxa — challenge'e, buildy i zabawne momenty!",
+    "cta": "Dołącz do gry!",
+    "tabs": {
+      "games": "Gry",
+      "badges": "Odznaki",
+      "friends": "Znajomi",
+      "inventory": "Ekwipunek"
+    },
+    "chatTitle": "Czat w grze",
+    "chat1": "Hej! Kto chce zagrać w Adopt Me? 🐱",
+    "chat2": "Ja! Mam nowego legendarnego kota! ✨",
+    "chat3": "Super! Zapraszam do mnie na serwer! 🎮"
+  },
+  "chapter4": {
+    "label": "ROZDZIAŁ 4",
+    "title": "K-Pop Corner",
+    "description": "Mój mały świat K-popu — lightsticki, ulubione zespoły i teledyski!",
+    "bias": "Bias List",
+    "favSong": "Ulubiona piosenka",
+    "illit": "ILLIT",
+    "blackpink": "BLACKPINK"
+  },
+  "chapter5": {
+    "label": "ROZDZIAŁ 5",
+    "title": "Funny Animalz",
+    "description": "Śmieszne zwierzaki, memy i momenty, które rozbawią Cię do łez!",
+    "panel1": "Czekaj... co?!",
+    "panel2": "To nie tak miało wyglądać!",
+    "panel3": "Hahaha!",
+    "panel4": "Ale słodziak!"
+  },
+  "chapter6": {
+    "label": "ROZDZIAŁ 6",
+    "title": "Kontynuacja wkrótce...",
+    "subtitle": "Czy Elenita zdobędzie milion subów?!",
+    "description": "Subskrybuj mój kanał, żeby być na bieżąco z nowymi odcinkami!",
+    "cta": "Subskrybuj na YouTube",
+    "followers": "Subskrybenci",
+    "thanks": "Dziękuję za wsparcie!"
+  },
+  "chapter7": {
+    "label": "ROZDZIAŁ 7",
+    "title": "Blog",
+    "comingSoon": "Wkrótce!",
+    "description": "Tutaj pojawią się wpisy o kotkach, Robloxie, K-popie i nie tylko!",
+    "preview1": "Moje 5 ulubionych gier w Robloxie",
+    "preview2": "Jak zrobić DIY lightstick ILLIT",
+    "preview3": "Top 10 śmiesznych momentów z kotami"
+  },
+  "chapter8": {
+    "label": "ROZDZIAŁ 8",
+    "title": "Merch",
+    "comingSoon": "Oficjalny merch już wkrótce!",
+    "items": {
+      "stickers": "Naklejki z kotkami",
+      "keychain": "Brelok lightstick",
+      "tote": "Torba pastelowa"
+    }
+  },
+  "footer": {
+    "credits": "Stworzone przez Elenita",
+    "copyright": "© 2026 Elenita's Cats. Wszystkie prawa zastrzeżone.",
+    "easterEgg": "🐾 Znalazłeś ukrytą łapę!"
+  },
+  "lang": {
+    "pl": "Polski",
+    "en": "English",
+    "ko": "한국어"
+  }
+}
