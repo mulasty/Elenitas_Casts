@@ -6,13 +6,7 @@ import { useTranslations } from "next-intl";
 import ParticleField, { GlowOrb } from "@/components/effects/ParticleField";
 import MagneticButton from "@/components/effects/MagneticButton";
 import ConfettiBurst from "@/components/effects/ConfettiBurst";
-
-// Replace with actual Elenita's Cats video IDs from youtube.com/@エレニータ
-const catVideos = [
-  { id: "t8RPLVC3wag", title: "Cat troll face" },
-  { id: "dQw4w9WgXcQ", title: "Placeholder cute cat moment" },
-  { id: "jNQXAC9IVRw", title: "Placeholder funny cat" },
-];
+import { useYouTubeFeed } from "@/hooks/useYouTubeFeed";
 
 const hoverSpeedLines = Array.from({ length: 8 }, (_, index) => ({
   x2: 12 + ((index * 19) % 76),
@@ -24,11 +18,14 @@ export default function Chapter2_CatChronicles() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [confetti, setConfetti] = useState(false);
+  const { data: ytData } = useYouTubeFeed();
 
   const triggerConfetti = () => {
     setConfetti(true);
     setTimeout(() => setConfetti(false), 100);
   };
+
+  const latestVideos = ytData?.latestVideos?.slice(0, 6) || [];
 
   return (
     <section
@@ -81,59 +78,18 @@ export default function Chapter2_CatChronicles() {
           </p>
         </motion.div>
 
-        {/* Manga Grid */}
+        {/* Video Grid - Live from YouTube */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {catVideos.map((video, i) => (
+          {latestVideos.map((video, i) => (
             <motion.div
               key={video.id}
               initial={{ opacity: 0, y: 40, rotate: i % 2 === 0 ? -2 : 2 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 + i * 0.15 }}
             >
-              <MangaVideoPanel videoId={video.id} title={video.title} index={i + 1} />
+              <VideoCard videoId={video.id} title={video.title} thumbnail={video.thumbnail} index={i + 1} />
             </motion.div>
           ))}
-
-          {/* Extra manga panels without videos */}
-          <motion.div
-            initial={{ opacity: 0, y: 40, rotate: 2 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.65 }}
-            className="manga-panel bg-[#FFD1DC]/30 p-6 flex flex-col items-center justify-center text-center gap-4 min-h-[280px] cursor-pointer"
-            whileHover={{ scale: 1.03, rotate: 0 }}
-          >
-            <motion.span
-              className="text-6xl"
-              animate={{ scale: [1, 1.1, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
-            >
-              🐱
-            </motion.span>
-            <span className="font-[family-name:var(--font-bangers)] text-2xl text-[#D4AF37] sfx-text">
-              CUTE!
-            </span>
-            <p className="text-sm text-[#2D2D2D]/70">More cat moments coming soon!</p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 40, rotate: -2 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="manga-panel bg-[#AEC6CF]/30 p-6 flex flex-col items-center justify-center text-center gap-4 min-h-[280px] cursor-pointer"
-            whileHover={{ scale: 1.03, rotate: 0 }}
-          >
-            <motion.span
-              className="text-6xl"
-              animate={{ scale: [1, 1.1, 1] }}
-              transition={{ duration: 2.5, repeat: Infinity }}
-            >
-              😺
-            </motion.span>
-            <span className="font-[family-name:var(--font-bangers)] text-2xl text-[#D4AF37] sfx-text">
-              BOOM!
-            </span>
-            <p className="text-sm text-[#2D2D2D]/70">Funny fails compilation!</p>
-          </motion.div>
         </div>
 
         {/* Bottom CTA */}
@@ -166,13 +122,15 @@ export default function Chapter2_CatChronicles() {
   );
 }
 
-function MangaVideoPanel({
+function VideoCard({
   videoId,
   title,
+  thumbnail,
   index,
 }: {
   videoId: string;
   title: string;
+  thumbnail?: string;
   index: number;
 }) {
   return (
@@ -181,48 +139,50 @@ function MangaVideoPanel({
       whileHover={{ y: -6, rotate: 0 }}
       transition={{ type: "spring" }}
     >
-      {/* Panel number badge */}
       <div className="absolute top-2 left-2 z-10 bg-[#2D2D2D] text-white font-[family-name:var(--font-bangers)] text-sm px-2 py-0.5 rounded-md shadow-sm">
-        Panel {index}
+        #{index}
       </div>
 
-      {/* Video container */}
-      <div className="relative aspect-video bg-[#2D2D2D]/5 overflow-hidden">
-        <iframe
-          src={`https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`}
-          title={title}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          loading="lazy"
-          className="w-full h-full"
-        />
-      </div>
+      <a
+        href={`https://www.youtube.com/watch?v=${videoId}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block relative aspect-video bg-[#2D2D2D]/5 overflow-hidden"
+      >
+        {thumbnail ? (
+          <>
+            <img
+              src={thumbnail}
+              alt={title}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="w-12 h-12 bg-[#FF6B9D] rounded-full flex items-center justify-center shadow-lg opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+              </div>
+            </div>
+          </>
+        ) : (
+          <iframe
+            src={`https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`}
+            title={title}
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            loading="lazy"
+            className="w-full h-full"
+          />
+        )}
+      </a>
 
-      {/* Panel caption */}
       <div className="p-3 bg-white border-t-[3px] border-[#2D2D2D]">
-        <p className="font-[family-name:var(--font-nunito)] text-sm font-bold text-[#2D2D2D]">
+        <p className="font-[family-name:var(--font-nunito)] text-sm font-bold text-[#2D2D2D] line-clamp-2">
           {title}
         </p>
       </div>
 
-      {/* Hover speed lines */}
-      <div className="absolute inset-0 pointer-events-none opacity-0 group-hover:opacity-20 transition-opacity">
-        <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-          {hoverSpeedLines.map((line, index) => (
-            <line
-              key={index}
-              x1={50}
-              y1={50}
-              x2={line.x2}
-              y2={line.y2}
-              stroke="#2D2D2D"
-              strokeWidth="0.5"
-            />
-          ))}
-        </svg>
-      </div>
-
-      {/* Hover glow */}
       <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
     </motion.div>
   );

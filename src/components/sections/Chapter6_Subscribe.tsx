@@ -3,6 +3,8 @@
 import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { useTranslations } from "next-intl";
+import { Eye, Video } from "lucide-react";
+import { useYouTubeFeed, formatViewCount } from "@/hooks/useYouTubeFeed";
 
 const spotlightLines = Array.from({ length: 6 }, (_, index) => ({
   x2: 180 + index * 216,
@@ -16,20 +18,16 @@ export default function Chapter6_Subscribe() {
   const [count, setCount] = useState(0);
   const [targetCount, setTargetCount] = useState(586);
   const [latestVideo, setLatestVideo] = useState<{ id: string; title: string } | null>(null);
+  const { data: ytData } = useYouTubeFeed();
 
   useEffect(() => {
-    fetch("/api/youtube")
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.subscriberCount) {
-          setTargetCount(data.subscriberCount);
-        }
-        if (data.latestVideos?.length > 0) {
-          setLatestVideo(data.latestVideos[0]);
-        }
-      })
-      .catch(() => {});
-  }, []);
+    if (ytData?.stats) {
+      setTargetCount(ytData.stats.subscriberCount);
+    }
+    if (ytData?.latestVideos && ytData.latestVideos.length > 0) {
+      setLatestVideo(ytData.latestVideos[0]);
+    }
+  }, [ytData]);
 
   useEffect(() => {
     if (!isInView) return;
@@ -125,11 +123,39 @@ export default function Chapter6_Subscribe() {
             >
               {count.toLocaleString()}
             </motion.p>
-            <div className="flex items-center justify-center gap-2 mt-2">
-              <span className="text-green-400 text-sm">▲</span>
-              <span className="text-white/60 text-sm">+123 dzisiaj</span>
-            </div>
           </div>
+
+          {/* Stats Grid */}
+          {ytData?.stats && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.7 }}
+              className="grid grid-cols-3 gap-4 mt-6"
+            >
+              <div className="bg-white/5 backdrop-blur border-2 border-white/10 rounded-2xl p-4 text-center">
+                <Eye size={20} className="mx-auto mb-1 text-[#D4AF37]" />
+                <p className="font-[family-name:var(--font-bangers)] text-xl md:text-2xl text-white">
+                  {formatViewCount(ytData.stats.viewCount)}
+                </p>
+                <p className="text-xs text-white/40 mt-1">Wyświetlenia</p>
+              </div>
+              <div className="bg-white/5 backdrop-blur border-2 border-white/10 rounded-2xl p-4 text-center">
+                <Video size={20} className="mx-auto mb-1 text-[#FF6B9D]" />
+                <p className="font-[family-name:var(--font-bangers)] text-xl md:text-2xl text-white">
+                  {ytData.stats.videoCount.toLocaleString()}
+                </p>
+                <p className="text-xs text-white/40 mt-1">Filmy</p>
+              </div>
+              <div className="bg-white/5 backdrop-blur border-2 border-white/10 rounded-2xl p-4 text-center">
+                <span className="text-2xl">👤</span>
+                <p className="font-[family-name:var(--font-bangers)] text-xl md:text-2xl text-white">
+                  {ytData.stats.subscriberCount.toLocaleString()}
+                </p>
+                <p className="text-xs text-white/40 mt-1">Suby</p>
+              </div>
+            </motion.div>
+          )}
         </motion.div>
 
         <motion.p

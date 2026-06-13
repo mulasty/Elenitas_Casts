@@ -13,11 +13,7 @@ import RobloxAvatar, { RobloxBlock, RobloxStud } from "@/components/effects/Robl
 import { Star, Users, Trophy, MessageSquare, ShoppingCart, Zap, Gamepad2 } from "lucide-react";
 import type { RobloxGame } from "@/lib/roblox";
 import { formatVisits } from "@/lib/roblox";
-
-const robloxVideos = [
-  { id: "dQw4w9WgXcQ", title: "Extreme Challenge!" },
-  { id: "jNQXAC9IVRw", title: "Roblox Build Mode" },
-];
+import { useYouTubeFeed } from "@/hooks/useYouTubeFeed";
 
 const GAME_ICONS = ["🎮", "🦄", "🍎", "🏗️", "🏠", "🐱", "⚔️", "🔮", "🌟", "🎯"];
 const GAME_COLORS = ["#FFB7B2", "#FFDAC1", "#E2F0CB", "#B5EAD7", "#C7CEEA", "#F8B195", "#D4AF37", "#C3B1E1", "#FF6B9D", "#77DD77"];
@@ -67,6 +63,12 @@ export default function Chapter3_Roblox() {
   const [friendsCount, setFriendsCount] = useState(142);
   const [realGames, setRealGames] = useState(fallbackGames);
   const [isLive, setIsLive] = useState(false);
+  const { data: ytData } = useYouTubeFeed();
+
+  const robloxVideos = ytData?.latestVideos?.slice(0, 2) || [
+    { id: "t8RPLVC3wag", title: "Roblox moment" },
+    { id: "C6T0YlZbWTU", title: "Roblox fun" },
+  ];
 
   useEffect(() => {
     fetch("/api/roblox")
