@@ -87,7 +87,7 @@ export default function Chapter2_CatChronicles() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: 0.2 + i * 0.15 }}
             >
-              <VideoCard videoId={video.id} title={video.title} thumbnail={video.thumbnail} index={i + 1} />
+              <VideoCard videoId={video.id} title={video.title} index={i + 1} />
             </motion.div>
           ))}
         </div>
@@ -125,12 +125,10 @@ export default function Chapter2_CatChronicles() {
 function VideoCard({
   videoId,
   title,
-  thumbnail,
   index,
 }: {
   videoId: string;
   title: string;
-  thumbnail?: string;
   index: number;
 }) {
   return (
@@ -143,39 +141,16 @@ function VideoCard({
         #{index}
       </div>
 
-      <a
-        href={`https://www.youtube.com/watch?v=${videoId}`}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="block relative aspect-video bg-[#2D2D2D]/5 overflow-hidden"
-      >
-        {thumbnail ? (
-          <>
-            <img
-              src={thumbnail}
-              alt={title}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              loading="lazy"
-            />
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="w-12 h-12 bg-[#FF6B9D] rounded-full flex items-center justify-center shadow-lg opacity-90 group-hover:opacity-100 group-hover:scale-110 transition-all">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
-              </div>
-            </div>
-          </>
-        ) : (
-          <iframe
-            src={`https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`}
-            title={title}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            loading="lazy"
-            className="w-full h-full"
-          />
-        )}
-      </a>
+      <div className="relative aspect-video bg-[#2D2D2D]/5 overflow-hidden">
+        <iframe
+          src={`https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`}
+          title={title}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          loading="lazy"
+          className="w-full h-full"
+        />
+      </div>
 
       <div className="p-3 bg-white border-t-[3px] border-[#2D2D2D]">
         <p className="font-[family-name:var(--font-nunito)] text-sm font-bold text-[#2D2D2D] line-clamp-2">
