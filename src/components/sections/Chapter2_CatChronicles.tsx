@@ -1,29 +1,16 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { useTranslations } from "next-intl";
 import ParticleField, { GlowOrb } from "@/components/effects/ParticleField";
-import MagneticButton from "@/components/effects/MagneticButton";
-import ConfettiBurst from "@/components/effects/ConfettiBurst";
 import { useYouTubeFeed } from "@/hooks/useYouTubeFeed";
-
-const hoverSpeedLines = Array.from({ length: 8 }, (_, index) => ({
-  x2: 12 + ((index * 19) % 76),
-  y2: 10 + ((index * 23) % 80),
-}));
 
 export default function Chapter2_CatChronicles() {
   const t = useTranslations("chapter2");
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const [confetti, setConfetti] = useState(false);
   const { data: ytData } = useYouTubeFeed();
-
-  const triggerConfetti = () => {
-    setConfetti(true);
-    setTimeout(() => setConfetti(false), 100);
-  };
 
   const latestVideos = ytData?.latestVideos?.slice(0, 6) || [];
 
@@ -92,31 +79,7 @@ export default function Chapter2_CatChronicles() {
           ))}
         </div>
 
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : {}}
-          transition={{ delay: 1 }}
-          className="text-center mt-12 relative"
-        >
-          <MagneticButton strength={0.3}>
-            <motion.a
-              href="https://www.youtube.com/@エレニータ"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-[#FF6B9D] text-white font-bold rounded-xl border-[3px] border-[#2D2D2D] shadow-[4px_4px_0px_#2D2D2D]"
-              whileHover={{ boxShadow: "6px 6px 0px #2D2D2D", scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={triggerConfetti}
-            >
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
-                <path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.38.55A3.02 3.02 0 0 0 .5 6.19 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.14c1.88.55 9.38.55 9.38.55s7.5 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.81zM9.55 15.5V8.5l6.27 3.5-6.27 3.5z" />
-              </svg>
-              {t("watch")}
-            </motion.a>
-          </MagneticButton>
-          <ConfettiBurst trigger={confetti} count={30} originX={50} originY={80} />
-        </motion.div>
+
       </div>
     </section>
   );
@@ -143,7 +106,7 @@ function VideoCard({
 
       <div className="relative aspect-video bg-[#2D2D2D]/5 overflow-hidden">
         <iframe
-          src={`https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1`}
+          src={`https://www.youtube.com/embed/${videoId}?rel=0&modestbranding=1&autoplay=1&mute=1&loop=1&playlist=${videoId}`}
           title={title}
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen

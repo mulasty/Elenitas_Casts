@@ -524,7 +524,7 @@ export default function Chapter3_Roblox() {
             >
               <div className="relative aspect-video">
                 <iframe
-                  src={`https://www.youtube.com/embed/${video.id}?rel=0&modestbranding=1`}
+                  src={`https://www.youtube.com/embed/${video.id}?rel=0&modestbranding=1&autoplay=1&mute=1&loop=1&playlist=${video.id}`}
                   title={video.title}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
