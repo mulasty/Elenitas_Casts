@@ -13,7 +13,6 @@ import Chapter5_FunnyAnimalz from "@/components/sections/Chapter5_FunnyAnimalz";
 import Chapter6_Subscribe from "@/components/sections/Chapter6_Subscribe";
 import Chapter7_Blog, { Chapter8_Merch } from "@/components/sections/Chapter7_Blog";
 import Footer from "@/components/sections/Footer";
-import GuideAvatar from "@/components/guide/GuideAvatar";
 
 export default function HomePage() {
   const [loading, setLoading] = useState(true);
@@ -37,7 +36,6 @@ export default function HomePage() {
             <Chapter8_Merch />
           </main>
           <Footer />
-          <GuideAvatar />
         </>
       )}
     </>

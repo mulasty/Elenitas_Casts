@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 import ParticleField, { GlowOrb } from "@/components/effects/ParticleField";
 import { useYouTubeFeed } from "@/hooks/useYouTubeFeed";
@@ -9,8 +9,7 @@ import { useYouTubeFeed } from "@/hooks/useYouTubeFeed";
 export default function Chapter2_CatChronicles() {
   const t = useTranslations("chapter2");
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-  const { data: ytData } = useYouTubeFeed();
+  const { data: ytData, loading } = useYouTubeFeed();
 
   const latestVideos = ytData?.latestVideos?.slice(0, 6) || [];
 
@@ -44,7 +43,8 @@ export default function Chapter2_CatChronicles() {
       <div className="max-w-6xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
@@ -67,19 +67,36 @@ export default function Chapter2_CatChronicles() {
 
         {/* Video Grid - Live from YouTube */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {latestVideos.map((video, i) => (
-            <motion.div
-              key={video.id}
-              initial={{ opacity: 0, y: 40, rotate: i % 2 === 0 ? -2 : 2 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 + i * 0.15 }}
-            >
-              <VideoCard videoId={video.id} title={video.title} index={i + 1} />
-            </motion.div>
-          ))}
+          {loading ? (
+            Array.from({ length: 6 }).map((_, i) => (
+              <div
+                key={i}
+                className="manga-panel overflow-hidden"
+              >
+                <div className="aspect-video bg-[#2D2D2D]/10 animate-pulse rounded-t-2xl" />
+                <div className="p-3 bg-white border-t-[3px] border-[#2D2D2D]">
+                  <div className="h-4 bg-[#2D2D2D]/10 animate-pulse rounded w-3/4" />
+                </div>
+              </div>
+            ))
+          ) : latestVideos.length > 0 ? (
+            latestVideos.map((video, i) => (
+              <motion.div
+                key={video.id}
+                initial={{ opacity: 0, y: 40, rotate: i % 2 === 0 ? -2 : 2 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: i * 0.1 }}
+              >
+                <VideoCard videoId={video.id} title={video.title} index={i + 1} />
+              </motion.div>
+            ))
+          ) : (
+            <div className="col-span-full text-center py-12">
+              <p className="text-lg text-[#2D2D2D]/50">Ładowanie filmów...</p>
+            </div>
+          )}
         </div>
-
-
       </div>
     </section>
   );
