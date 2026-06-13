@@ -1,42 +1,42 @@
 import { NextResponse } from "next/server";
 
-const YOUTUBE_CHANNEL_HANDLE = "@エレニータ";
+const YOUTUBE_CHANNEL_ID = "UCxURVEh8UEwyS5KtyLLb0NA";
 const YOUTUBE_API_KEY = process.env.YOUTUBE_API_KEY || "";
 
 export const revalidate = 3600;
 
-async function fetchFromYouTube(endpoint: string) {
-  if (!YOUTUBE_API_KEY) {
-    return null;
-  }
-  const res = await fetch(
-    `https://www.googleapis.com/youtube/v3/${endpoint}&key=${YOUTUBE_API_KEY}`,
-    { next: { revalidate: 3600 } }
-  );
-  if (!res.ok) return null;
-  return res.json();
-}
-
 export async function GET() {
   try {
-    let subscriberCount: number | null = null;
+    let subscriberCount = 586;
     let latestVideos: Array<{ id: string; title: string; thumbnail: string }> =
       [];
 
     if (YOUTUBE_API_KEY) {
-      const channelRes = await fetchFromYouTube(
-        `channels?part=statistics&forHandle=${YOUTUBE_CHANNEL_HANDLE}`
-      );
-      if (channelRes?.items?.length > 0) {
-        const channel = channelRes.items[0];
-        subscriberCount = parseInt(channel.statistics.subscriberCount, 10);
-        const channelId = channel.id;
+      const [channelRes, videosRes] = await Promise.all([
+        fetch(
+          `https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${YOUTUBE_CHANNEL_ID}&key=${YOUTUBE_API_KEY}`,
+          { next: { revalidate: 3600 } }
+        ),
+        fetch(
+          `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${YOUTUBE_CHANNEL_ID}&order=date&maxResults=6&type=video&key=${YOUTUBE_API_KEY}`,
+          { next: { revalidate: 3600 } }
+        ),
+      ]);
 
-        const videosRes = await fetchFromYouTube(
-          `search?part=snippet&channelId=${channelId}&order=date&maxResults=6&type=video`
-        );
-        if (videosRes?.items) {
-          latestVideos = videosRes.items.map(
+      if (channelRes.ok) {
+        const channelData = await channelRes.json();
+        if (channelData.items?.length > 0) {
+          subscriberCount = parseInt(
+            channelData.items[0].statistics.subscriberCount,
+            10
+          );
+        }
+      }
+
+      if (videosRes.ok) {
+        const videosData = await videosRes.json();
+        if (videosData.items) {
+          latestVideos = videosData.items.map(
             (v: {
               id: { videoId: string };
               snippet: { title: string; thumbnails: { medium: { url: string } } };
@@ -48,36 +48,13 @@ export async function GET() {
           );
         }
       }
-    } else {
-      const rssRes = await fetch(
-        `https://www.youtube.com/feeds/videos.xml?user=@エレニータ`,
-        { next: { revalidate: 3600 } }
-      );
-      if (rssRes.ok) {
-        const text = await rssRes.text();
-        const idMatches = text.match(/<yt:videoId>([^<]+)<\/yt:videoId>/g);
-        const titleMatches = text.match(
-          /<media:title>([^<]+)<\/media:title>/g
-        );
-        if (idMatches && titleMatches) {
-          latestVideos = idMatches.slice(0, 6).map((id, i) => ({
-            id: id.replace(/<\/?yt:videoId>/g, ""),
-            title: (titleMatches[i] || "")
-              .replace(/<\/?media:title>/g, ""),
-            thumbnail: "",
-          }));
-        }
-      }
     }
 
-    return NextResponse.json({
-      subscriberCount: subscriberCount || 15243,
-      latestVideos,
-    });
+    return NextResponse.json({ subscriberCount, latestVideos });
   } catch (error) {
     console.error("YouTube API error:", error);
     return NextResponse.json({
-      subscriberCount: 15243,
+      subscriberCount: 586,
       latestVideos: [],
     });
   }

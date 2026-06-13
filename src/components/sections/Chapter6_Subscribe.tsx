@@ -14,7 +14,7 @@ export default function Chapter6_Subscribe() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [count, setCount] = useState(0);
-  const [targetCount, setTargetCount] = useState(15243);
+  const [targetCount, setTargetCount] = useState(586);
   const [latestVideo, setLatestVideo] = useState<{ id: string; title: string } | null>(null);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export default function Chapter6_Subscribe() {
 
   useEffect(() => {
     if (!isInView) return;
-    if (targetCount === 15243) {
+    if (targetCount === 586) {
       setCount(targetCount);
       return;
     }
