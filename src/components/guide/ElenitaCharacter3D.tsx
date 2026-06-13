@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useMemo } from "react";
+import { useRef, useMemo, useState, useEffect } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 import { getRobloxColor } from "@/lib/roblox";
@@ -10,6 +10,7 @@ interface ElenitaCharacter3DProps {
   bodyColorId?: number;
   scale?: number;
   position?: [number, number, number];
+  headshotUrl?: string | null;
 }
 
 const HAIR_COLOR = "#6B4226";
@@ -43,11 +44,40 @@ function CharacterPart({
   );
 }
 
+function AvatarFace({ url }: { url: string }) {
+  const [texture, setTexture] = useState<THREE.Texture | null>(null);
+
+  useEffect(() => {
+    const loader = new THREE.TextureLoader();
+    loader.load(
+      url,
+      (tex) => {
+        tex.minFilter = THREE.LinearFilter;
+        tex.magFilter = THREE.LinearFilter;
+        tex.colorSpace = THREE.SRGBColorSpace;
+        setTexture(tex);
+      },
+      undefined,
+      () => {}
+    );
+  }, [url]);
+
+  if (!texture) return null;
+
+  return (
+    <mesh position={[0, 2.4, 0.38]} scale={[0.78, 0.73, 1]}>
+      <planeGeometry args={[1, 1]} />
+      <meshStandardMaterial map={texture} transparent />
+    </mesh>
+  );
+}
+
 export default function ElenitaCharacter3D({
   animation = "idle",
   bodyColorId = 352,
   scale = 1,
   position = [0, 0, 0],
+  headshotUrl = null,
 }: ElenitaCharacter3DProps) {
   const groupRef = useRef<THREE.Group>(null);
   const headRef = useRef<THREE.Group>(null);
@@ -161,24 +191,30 @@ export default function ElenitaCharacter3D({
           color={GLASSES_COLOR}
         />
 
-        {/* Eyes */}
-        <CharacterPart
-          position={[0.2, 2.49, 0.39]}
-          size={[0.12, 0.08, 0.02]}
-          color="#FFFFFF"
-        />
-        <CharacterPart
-          position={[-0.2, 2.49, 0.39]}
-          size={[0.12, 0.08, 0.02]}
-          color="#FFFFFF"
-        />
-
-        {/* Mouth */}
-        <CharacterPart
-          position={[0, 2.22, 0.4]}
-          size={[0.2, 0.04, 0.02]}
-          color="#D4898F"
-        />
+        {/* Real face from Roblox headshot */}
+        {headshotUrl ? (
+          <AvatarFace url={headshotUrl} />
+        ) : (
+          <>
+            {/* Eyes */}
+            <CharacterPart
+              position={[0.2, 2.49, 0.39]}
+              size={[0.12, 0.08, 0.02]}
+              color="#FFFFFF"
+            />
+            <CharacterPart
+              position={[-0.2, 2.49, 0.39]}
+              size={[0.12, 0.08, 0.02]}
+              color="#FFFFFF"
+            />
+            {/* Mouth */}
+            <CharacterPart
+              position={[0, 2.22, 0.4]}
+              size={[0.2, 0.04, 0.02]}
+              color="#D4898F"
+            />
+          </>
+        )}
       </group>
 
       {/* Torso (Woman shape) */}
@@ -248,6 +284,7 @@ export function ElenitaCharacterCanvas({
   animation = "idle",
   bodyColorId = 352,
   scale = 1,
+  headshotUrl = null,
 }: ElenitaCharacter3DProps) {
   return (
     <mesh>
@@ -256,6 +293,7 @@ export function ElenitaCharacterCanvas({
         bodyColorId={bodyColorId}
         scale={scale}
         position={[0, -1.5, 0]}
+        headshotUrl={headshotUrl}
       />
     </mesh>
   );

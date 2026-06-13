@@ -60,7 +60,19 @@ export default function GuideAvatar() {
   const [messageIndex, setMessageIndex] = useState(0);
   const [showBubble, setShowBubble] = useState(true);
   const [isVisible, setIsVisible] = useState(false);
+  const [headshotUrl, setHeadshotUrl] = useState<string | null>(null);
   const bubbleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    fetch("/api/roblox")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.headshotUrl) {
+          setHeadshotUrl(data.headshotUrl);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   const cycleAnimation = useCallback(() => {
     setAnimation((prev) => {
@@ -179,6 +191,7 @@ export default function GuideAvatar() {
               animation={animation}
               scale={0.9}
               position={[0, -0.8, 0]}
+              headshotUrl={headshotUrl}
             />
           </Canvas>
 
