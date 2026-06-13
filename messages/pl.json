@@ -122,5 +122,39 @@
     "pl": "Polski",
     "en": "English",
     "ko": "한국어"
+  },
+  "guide": {
+    "hero": {
+      "0": "Hej! Jestem Elenita! 👋",
+      "1": "Przewiń w dół, pokażę Ci mój świat!"
+    },
+    "chapter1": {
+      "0": "To ja! Kotki, Roblox i K-Pop ❤️",
+      "1": "Mam 41 znajomych na Robloxie!"
+    },
+    "chapter2": {
+      "0": "Poznaj moje futrzaste przyjaciółki! 🐱"
+    },
+    "chapter3": {
+      "0": "Kocham grać w Robloxa! 🎮",
+      "1": "Sprawdź moje ulubione gry!"
+    },
+    "chapter4": {
+      "0": "ILLIT i BLACKPINK to moje biasy! 🎵",
+      "1": "Zobacz moją kolekcję lightsticków!"
+    },
+    "chapter5": {
+      "0": "Śmieszne zwierzaki! HAHAHA! 😹"
+    },
+    "chapter6": {
+      "0": "Subskrybuj mój kanał! Będzie super! ✨"
+    },
+    "chapter7": {
+      "0": "Blog już wkrótce! 📝",
+      "1": "Będę tu pisać o moich przygodach!"
+    },
+    "chapter8": {
+      "0": "Mój merch będzie słodki! 🛍️"
+    }
   }
 }

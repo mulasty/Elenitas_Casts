@@ -122,5 +122,39 @@
     "pl": "Polski",
     "en": "English",
     "ko": "한국어"
+  },
+  "guide": {
+    "hero": {
+      "0": "Hey! I'm Elenita! 👋",
+      "1": "Scroll down, I'll show you my world!"
+    },
+    "chapter1": {
+      "0": "That's me! Cats, Roblox & K-Pop ❤️",
+      "1": "I have 41 friends on Roblox!"
+    },
+    "chapter2": {
+      "0": "Meet my furry friends! 🐱"
+    },
+    "chapter3": {
+      "0": "I love playing Roblox! 🎮",
+      "1": "Check out my favorite games!"
+    },
+    "chapter4": {
+      "0": "ILLIT & BLACKPINK are my biases! 🎵",
+      "1": "See my lightstick collection!"
+    },
+    "chapter5": {
+      "0": "Funny animals! HAHAHA! 😹"
+    },
+    "chapter6": {
+      "0": "Subscribe to my channel! It'll be awesome! ✨"
+    },
+    "chapter7": {
+      "0": "Blog coming soon! 📝",
+      "1": "I'll write about my adventures here!"
+    },
+    "chapter8": {
+      "0": "My merch is gonna be cute! 🛍️"
+    }
   }
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, Suspense } from "react";
+import { useRef, useState, Suspense, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useTranslations } from "next-intl";
 import { Canvas } from "@react-three/fiber";
@@ -11,61 +11,25 @@ import MagneticButton from "@/components/effects/MagneticButton";
 import ConfettiBurst from "@/components/effects/ConfettiBurst";
 import RobloxAvatar, { RobloxBlock, RobloxStud } from "@/components/effects/RobloxAvatar";
 import { Star, Users, Trophy, MessageSquare, ShoppingCart, Zap, Gamepad2 } from "lucide-react";
+import type { RobloxGame } from "@/lib/roblox";
+import { formatVisits } from "@/lib/roblox";
 
 const robloxVideos = [
   { id: "dQw4w9WgXcQ", title: "Extreme Challenge!" },
   { id: "jNQXAC9IVRw", title: "Roblox Build Mode" },
 ];
 
-const robloxGames = [
-  {
-    name: "Adopt Me!",
-    icon: "🦄",
-    color: "#FFB7B2",
-    players: "83.5M",
-    rating: 4.8,
-    tag: "Popular",
-  },
-  {
-    name: "Blox Fruits",
-    icon: "🍎",
-    color: "#FFDAC1",
-    players: "42.2M",
-    rating: 4.6,
-    tag: "Action",
-  },
-  {
-    name: "Tower of Hell",
-    icon: "🏗️",
-    color: "#E2F0CB",
-    players: "21.8M",
-    rating: 4.3,
-    tag: "Obby",
-  },
-  {
-    name: "Brookhaven",
-    icon: "🏠",
-    color: "#B5EAD7",
-    players: "38.1M",
-    rating: 4.5,
-    tag: "RP",
-  },
-  {
-    name: "MeepCity",
-    icon: "🐱",
-    color: "#C7CEEA",
-    players: "15.4M",
-    rating: 4.2,
-    tag: "Social",
-  },
-  {
-    name: "BedWars",
-    icon: "⚔️",
-    color: "#F8B195",
-    players: "28.7M",
-    rating: 4.4,
-    tag: "PVP",
-  },
+const GAME_ICONS = ["🎮", "🦄", "🍎", "🏗️", "🏠", "🐱", "⚔️", "🔮", "🌟", "🎯"];
+const GAME_COLORS = ["#FFB7B2", "#FFDAC1", "#E2F0CB", "#B5EAD7", "#C7CEEA", "#F8B195", "#D4AF37", "#C3B1E1", "#FF6B9D", "#77DD77"];
+const GAME_TAGS = ["Popular", "Action", "Obby", "RP", "Social", "PVP", "Adventure", "Horror", "Tycoon", "Simulator"];
+
+const fallbackGames = [
+  { name: "Adopt Me!", icon: "🦄", color: "#FFB7B2", players: "83.5M", rating: 4.8, tag: "Popular" },
+  { name: "Blox Fruits", icon: "🍎", color: "#FFDAC1", players: "42.2M", rating: 4.6, tag: "Action" },
+  { name: "Tower of Hell", icon: "🏗️", color: "#E2F0CB", players: "21.8M", rating: 4.3, tag: "Obby" },
+  { name: "Brookhaven", icon: "🏠", color: "#B5EAD7", players: "38.1M", rating: 4.5, tag: "RP" },
+  { name: "MeepCity", icon: "🐱", color: "#C7CEEA", players: "15.4M", rating: 4.2, tag: "Social" },
+  { name: "BedWars", icon: "⚔️", color: "#F8B195", players: "28.7M", rating: 4.4, tag: "PVP" },
 ];
 
 const badges = [
@@ -100,6 +64,32 @@ export default function Chapter3_Roblox() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [activeTab, setActiveTab] = useState<"games" | "badges" | "friends" | "inventory">("games");
   const [confettiTrigger, setConfettiTrigger] = useState(false);
+  const [friendsCount, setFriendsCount] = useState(142);
+  const [realGames, setRealGames] = useState(fallbackGames);
+  const [isLive, setIsLive] = useState(false);
+
+  useEffect(() => {
+    fetch("/api/roblox")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.friendsCount) {
+          setFriendsCount(data.friendsCount);
+          setIsLive(true);
+        }
+        if (data.favoriteGames?.length > 0) {
+          const games = (data.favoriteGames as RobloxGame[]).slice(0, 6).map((g, i) => ({
+            name: g.name || fallbackGames[i].name,
+            icon: GAME_ICONS[i % GAME_ICONS.length],
+            color: GAME_COLORS[i % GAME_COLORS.length],
+            players: formatVisits(g.placeVisits),
+            rating: 4 + Math.random() * 1,
+            tag: GAME_TAGS[i % GAME_TAGS.length],
+          }));
+          setRealGames(games);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   const triggerConfetti = () => {
     setConfettiTrigger(true);
@@ -186,7 +176,7 @@ export default function Chapter3_Roblox() {
 
               {/* Stats Row */}
               <div className="flex flex-wrap justify-center md:justify-start gap-4">
-                <StatBadge icon={<Users size={16} />} label="Friends" value="142" color="#AEC6CF" />
+                <StatBadge icon={<Users size={16} />} label="Friends" value={String(friendsCount)} color="#AEC6CF" />
                 <StatBadge icon={<Trophy size={16} />} label="Badges" value="24" color="#D4AF37" />
                 <StatBadge icon={<Zap size={16} />} label="Level" value="87" color="#77DD77" />
                 <StatBadge icon={<Star size={16} />} label="Favorites" value="56" color="#FF6B9D" />
@@ -299,7 +289,7 @@ export default function Chapter3_Roblox() {
               transition={{ duration: 0.3 }}
             >
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-                {robloxGames.map((game, i) => (
+                {realGames.map((game, i) => (
                   <motion.div
                     key={game.name}
                     initial={{ opacity: 0, y: 30 }}
