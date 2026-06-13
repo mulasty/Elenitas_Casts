@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
-import { Play, Heart, Music } from "lucide-react";
+import { Play, Heart, Music, Coffee } from "lucide-react";
 
 export default function Footer() {
   const t = useTranslations("footer");
@@ -45,6 +45,12 @@ export default function Footer() {
             icon={<Heart size={24} />}
             label="Instagram"
             color="#FFD1DC"
+          />
+          <SocialLink
+            href="https://ko-fi.com/elenita"
+            icon={<Coffee size={24} />}
+            label="Support"
+            color="#D4AF37"
           />
         </div>
 

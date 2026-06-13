@@ -14,10 +14,29 @@ export default function Chapter6_Subscribe() {
   const ref = useRef<HTMLDivElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [count, setCount] = useState(0);
-  const targetCount = 15243; // Placeholder — update with real subscriber count
+  const [targetCount, setTargetCount] = useState(15243);
+  const [latestVideo, setLatestVideo] = useState<{ id: string; title: string } | null>(null);
+
+  useEffect(() => {
+    fetch("/api/youtube")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.subscriberCount) {
+          setTargetCount(data.subscriberCount);
+        }
+        if (data.latestVideos?.length > 0) {
+          setLatestVideo(data.latestVideos[0]);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   useEffect(() => {
     if (!isInView) return;
+    if (targetCount === 15243) {
+      setCount(targetCount);
+      return;
+    }
     const duration = 2000;
     const steps = 60;
     const increment = targetCount / steps;
@@ -32,7 +51,7 @@ export default function Chapter6_Subscribe() {
       }
     }, duration / steps);
     return () => clearInterval(timer);
-  }, [isInView]);
+  }, [isInView, targetCount]);
 
   return (
     <section
@@ -127,7 +146,7 @@ export default function Chapter6_Subscribe() {
           initial={{ opacity: 0, scale: 0.8 }}
           animate={isInView ? { opacity: 1, scale: 1 } : {}}
           transition={{ delay: 1.0, type: "spring" }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          className="flex flex-col items-center justify-center gap-6"
         >
           <a
             href="https://www.youtube.com/@エレニータ?sub_confirmation=1"
@@ -140,6 +159,21 @@ export default function Chapter6_Subscribe() {
             </svg>
             {t("cta")}
           </a>
+
+          {latestVideo && (
+            <motion.a
+              href={`https://www.youtube.com/watch?v=${latestVideo.id}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 10 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 1.2 }}
+              className="flex items-center gap-2 px-5 py-3 bg-white/10 border-2 border-white/20 rounded-xl text-white/80 hover:text-white hover:border-white/40 transition-all text-sm"
+            >
+              <span className="text-[#FF6B9D]">▶</span>
+              {latestVideo.title}
+            </motion.a>
+          )}
         </motion.div>
 
         <motion.p

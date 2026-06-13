@@ -3,6 +3,7 @@
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { useTranslations } from "next-intl";
+import SpotifyEmbed from "@/components/sections/SpotifyEmbed";
 
 const kpopVideos = [
   { id: "IHNzOHi8sJs", title: "BLACKPINK - DDU-DU DDU-DU", group: "blackpink" },
@@ -199,6 +200,8 @@ export default function Chapter4_Kpop() {
             </div>
           </div>
         </motion.div>
+
+        <SpotifyEmbed />
       </div>
     </section>
   );

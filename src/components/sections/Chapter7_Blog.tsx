@@ -91,9 +91,9 @@ export function Chapter8_Merch() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   const items = [
-    { name: t("items.stickers"), icon: "🐱", color: "#FFD1DC" },
-    { name: t("items.keychain"), icon: "💫", color: "#D4AF37" },
-    { name: t("items.tote"), icon: "🛍️", color: "#C3B1E1" },
+    { name: t("items.stickers"), icon: "🐱", color: "#FFD1DC", link: "https://www.redbubble.com/people/elenita/shop" },
+    { name: t("items.keychain"), icon: "💫", color: "#D4AF37", link: "https://www.redbubble.com/people/elenita/shop" },
+    { name: t("items.tote"), icon: "🛍️", color: "#C3B1E1", link: "https://www.redbubble.com/people/elenita/shop" },
   ];
 
   return (
@@ -120,12 +120,15 @@ export function Chapter8_Merch() {
 
         <div className="grid md:grid-cols-3 gap-6">
           {items.map((item, i) => (
-            <motion.div
+            <motion.a
               key={i}
+              href={item.link}
+              target="_blank"
+              rel="noopener noreferrer"
               initial={{ opacity: 0, scale: 0.8 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ delay: 0.3 + i * 0.15, type: "spring" }}
-              className="manga-panel p-6 flex flex-col items-center text-center gap-4"
+              className="manga-panel p-6 flex flex-col items-center text-center gap-4 cursor-pointer hover:shadow-[6px_6px_0px_rgba(45,45,45,0.15)]"
               style={{ backgroundColor: `${item.color}30` }}
             >
               <div
@@ -138,10 +141,10 @@ export function Chapter8_Merch() {
               <h3 className="font-[family-name:var(--font-fredoka)] text-lg text-[#2D2D2D]">
                 {item.name}
               </h3>
-              <span className="px-3 py-1 bg-[#2D2D2D] text-white text-xs font-bold rounded-full">
+              <span className="px-3 py-1 bg-[#FF6B9D] text-white text-xs font-bold rounded-full transition-transform">
                 SOON
               </span>
-            </motion.div>
+            </motion.a>
           ))}
         </div>
       </div>
